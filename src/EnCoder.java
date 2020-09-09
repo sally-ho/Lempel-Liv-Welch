@@ -39,7 +39,7 @@ public class EnCoder
 			}
 			else if ( combination.length () == 1 )
 			{
-				dictionary.put ( combination, 256 + counter );
+				dictionary.put ( combination, counter );
 			}
 			else
 			{
