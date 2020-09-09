@@ -2,7 +2,7 @@
 import java.util.*;
 import java.io.*;
 
-public class encoder
+public class EnCoder
 {
 	public static void main(String [] args){
 		HashMap<String, Integer> dictionary = new HashMap<String, Integer>();
@@ -10,7 +10,8 @@ public class encoder
 		String current;
 		int counter = 256;
 		String line = null;
-		String encoded;
+		String encoded = "";
+		String combination;
 		try{
 			FileReader fr = new FileReader("text.txt");
 			BufferedReader br = new BufferedReader (fr);
@@ -33,7 +34,7 @@ public class encoder
 					previous = current;
 				}
 				if (previous.length() == 1){
-					encoded += (int)((char)previous);
+					encoded += " " + (int)(previous.charAt(0));
 				}
 				else{
 					encoded += " " + dictionary.get(previous);
