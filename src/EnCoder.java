@@ -5,9 +5,7 @@ import java.io.*;
 public class EnCoder
 {
 	HashMap < String, Integer > dictionary = new HashMap < String, Integer > ();
-	
-	Scanner keyboard = new Scanner ( System.in );
-	
+
 	int counter = 1;
 	String previous;
 	String current;
@@ -15,14 +13,14 @@ public class EnCoder
 
 	FileReader fr = new FileReader ( "message.txt");
 	BufferedReader br = new BufferedReader ( fr );
-	
+
 	previous = null;
-	
+
 	while ( br.ready () )
 	{
 		current = "" + br.read ();
 		combination = previous + current;
-		
+
 		if ( dictionary.containsKey ( combination ) )
 		{
 			previous = combination;
@@ -32,29 +30,33 @@ public class EnCoder
 			dictionary.put ( combination, 256 + counter );
 		}
 		else
-			{
-				dictionary.put((previous + current), counter);
-				counter++;
-				encoded += " " + dictionary.get(previous);
-				previous = current;
-			}
+		{
+			dictionary.put((previous + current), counter);
+			counter++;
+			encoded += " " + dictionary.get(previous);
+			previous = current;
+		}
 
-			br.close ();
-			fr.close ();
-		}
-		catch ( Exception e ){
+		br.close ();
+		fr.close ();
+	}
+	
+	catch ( Exception e )
+	{
 		System.out.println ( "Error Occured" );
-		}
-		try {
+	}
+	
+	try
+	{
 		FileWriter fw = new FileWriter(new File("encoded.txt"));
 		BufferedWriter buffer = new BufferedWriter(fw);
 		buffer.write(encoded);
 		buffer.close();
-		}
-		catch (Exception e) {
-			System.out.println("Error Occured in Writing.");
-		}
 	}
-}
+	
+	catch (Exception e)
+	{
+		System.out.println("Error Occured in Writing.");
+	}
 }
 }
