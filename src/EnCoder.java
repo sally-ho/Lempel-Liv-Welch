@@ -24,23 +24,17 @@ public class EnCoder
 
 				current = String.valueOf((char)a);
 				combination = previous + current;
-				//System.out.println(combination);
 				if(combination.length() == 1){
 					previous = combination;
 				}
 				else if (dictionary.containsKey(combination))
 				{
-					//System.out.println(combination);
 					previous = combination;
-
-					//encoded += " " + dictionary.get(previous);
 				}
 
 				else
 				{
 					dictionary.put((combination), counter);
-					// System.out.println(combination);
-					// System.out.println(counter);
 					counter++;
 					if (previous.length() == 1){
 						encoded += " " + (int)(previous.charAt(0));
@@ -62,10 +56,11 @@ public class EnCoder
 			else{
 				encoded += " " + dictionary.get(previous);
 			}
-			for (String key : dictionary.keySet()){
-				System.out.println(key + ": " + dictionary.get(key));
-			}
-			//System.out.println(dictionary.values());
+			
+			//this code prints the dictionary...you're welcome
+			//for (String key : dictionary.keySet()){
+				//System.out.println(key + ": " + dictionary.get(key));
+			//}
 
 			br.close ();
 			fr.close ();
