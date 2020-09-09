@@ -1,19 +1,39 @@
+
 import java.util.*;
+import java.io.*;
 
 public class EnCoder
 {
-	ArrayList < String > dictionary = new ArrayList < String > ();
+	HashMap < String, Integer > dictionary = new HashMap < String, Integer > ();
 	
 	Scanner keyboard = new Scanner ( System.in );
 	
-	while ( ??? )
+	int counter = 1;
+	String previous;
+	String current;
+	String combination;
+
+	FileReader fr = new FileReader ( "message.txt");
+	BufferedReader br = new BufferedReader ( fr );
+	
+	previous = null;
+	
+	while ( br.ready () )
 	{
-		if ()
+		current = "" + br.read ();
+		combination = previous + current;
+		
+		if ( dictionary.containsKey ( combination ) )
 		{
+			previous = combination;
+		}
+		else if ( combination.length () == 1 )
+		{
+			dictionary.put ( combination, 256 + counter );
 		}
 		else
 		{
-			
 		}
 	}
+}
 }
