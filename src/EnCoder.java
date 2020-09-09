@@ -37,10 +37,10 @@ public class EnCoder
 					dictionary.put((combination), counter);
 					counter++;
 					if (previous.length() == 1){
-						encoded += " " + (int)(previous.charAt(0));
+						encoded += (int)(previous.charAt(0)) + " ";
 					}
 					else{
-						encoded += " " + dictionary.get(previous);
+						encoded += dictionary.get(previous) + " ";
 					}
 					previous = current;
 					
@@ -51,10 +51,10 @@ public class EnCoder
 				
 			}
 			if (previous.length() == 1){
-				encoded += " " + (int)(previous.charAt(0));
+				encoded += (int)(previous.charAt(0));
 			}
 			else{
-				encoded += " " + dictionary.get(previous);
+				encoded += dictionary.get(previous);
 			}
 			
 			//this code prints the dictionary...you're welcome
