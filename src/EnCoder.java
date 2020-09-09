@@ -7,16 +7,26 @@ public class EnCoder
 	public static void main(String [] args)
 	{
 		HashMap < String, Integer > dictionary = new HashMap < String, Integer > ();
+			// HashMap Dictionary for Strings and Integers
+		
 		String previous;
+			// String for Previous
+		
 		String current;
+			// String for Current
+		
 		String combination;
-		int counter = 0;
+			// String for Previous + Current
+		
+		int counter = 256;
+			// String for 
+		
 		String encoded;
 
 		FileReader fr = new FileReader ( "message.txt");
 		BufferedReader br = new BufferedReader ( fr );
 
-		previous = null;
+		previous = "";
 
 		while ( br.ready () )
 		{
@@ -56,7 +66,7 @@ public class EnCoder
 			buffer.close();
 		}
 
-		catch (Exception e)
+		catch ( Exception e )
 		{
 			System.out.println("Error Occured in Writing.");
 		}
