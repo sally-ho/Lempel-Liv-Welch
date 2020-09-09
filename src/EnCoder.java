@@ -8,35 +8,41 @@ public class encoder
 		HashMap<String, Integer> dictionary = new HashMap<String, Integer>();
 		String previous;
 		String current;
-		int counter = 0;
+		int counter = 256;
 		String line = null;
 		String encoded;
 		try{
 			FileReader fr = new FileReader("text.txt");
 			BufferedReader br = new BufferedReader (fr);
 				
-			previous = null;
+			previous = "";
 				
 			int a;
 			while ((a = br.read()) != -1)
 			{
-				if (counter == 0) {
-					current = String.valueOf((char)a);
-				}
-				if ()
+				current = String.valueOf((char)a);
+				combination = previous + current;
+				if (dictionary.containsKey(combination))
 				{
+					previous = combination;
 				}
 				else
 				{
 					dictionary.put((previous + current), counter);
 					counter++;
-					encoded += " " + dictionary.get(previous);
 					previous = current;
 				}
-
-				br.close ();
-				fr.close ();
+				if (previous.length() == 1){
+					encoded += (int)((char)previous);
+				}
+				else{
+					encoded += " " + dictionary.get(previous);
+				}
+				
+				
 			}
+			br.close ();
+			fr.close ();
 		}
 				
 		catch ( Exception e ){
