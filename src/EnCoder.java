@@ -6,14 +6,18 @@ public class EnCoder
 	
 	Scanner keyboard = new Scanner ( System.in );
 	
-	while ( ??? )
+	String previous = null;
+	String current = keyboard.next ();
+	
+	while ( keyboard.hasNext () )
 	{
-		if ()
+		if ( )
 		{
 		}
 		else
 		{
-			
 		}
 	}
+	
+	keyboard.close ();
 }
