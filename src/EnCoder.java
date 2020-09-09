@@ -1,4 +1,6 @@
+
 import java.util.*;
+import java.io.*;
 
 public class EnCoder
 {
@@ -6,18 +8,36 @@ public class EnCoder
 	
 	Scanner keyboard = new Scanner ( System.in );
 	
-	String previous = null;
-	String current = keyboard.next ();
+	String previous;
+	String current;
 	
-	while ( keyboard.hasNext () )
-	{
-		if ( )
+	String line = null;
+	try
+
 		{
+			FileReader fr = new FileReader ( "text.txt");
+			BufferedReader br = new BufferedReader ( fr );
+			
+			previous = null;
+			current = ( String ) br.read ();
+			
+			while ( br.ready () )
+			{
+				if (  )
+				{
+				}
+				else
+				{
+					
+				}
+
+				br.close ();
+				fr.close ();
+			}
+			
+			catch ( Exception e )
+			{
+				System.out.println ( "Error Occured" );
+			}
 		}
-		else
-		{
-		}
-	}
-	
-	keyboard.close ();
 }
