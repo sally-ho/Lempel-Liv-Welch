@@ -11,7 +11,7 @@ public class EnCoder
 		int counter = 256;
 		String line = null;
 		String encoded = "";
-		String combination;
+		String combination = "";
 		try{
 			FileReader fr = new FileReader("text.txt");
 			BufferedReader br = new BufferedReader (fr);
@@ -21,27 +21,52 @@ public class EnCoder
 			int a;
 			while ((a = br.read()) != -1)
 			{
+
 				current = String.valueOf((char)a);
 				combination = previous + current;
-				if (dictionary.containsKey(combination))
-				{
+				//System.out.println(combination);
+				if(combination.length() == 1){
 					previous = combination;
 				}
+				else if (dictionary.containsKey(combination))
+				{
+					//System.out.println(combination);
+					previous = combination;
+
+					//encoded += " " + dictionary.get(previous);
+				}
+
 				else
 				{
-					dictionary.put((previous + current), counter);
+					dictionary.put((combination), counter);
+					// System.out.println(combination);
+					// System.out.println(counter);
 					counter++;
+					if (previous.length() == 1){
+						encoded += " " + (int)(previous.charAt(0));
+					}
+					else{
+						encoded += " " + dictionary.get(previous);
+					}
 					previous = current;
+					
 				}
-				if (previous.length() == 1){
-					encoded += " " + (int)(previous.charAt(0));
-				}
-				else{
-					encoded += " " + dictionary.get(previous);
-				}
+					
+				
 				
 				
 			}
+			if (previous.length() == 1){
+				encoded += " " + (int)(previous.charAt(0));
+			}
+			else{
+				encoded += " " + dictionary.get(previous);
+			}
+			for (String key : dictionary.keySet()){
+				System.out.println(key + ": " + dictionary.get(key));
+			}
+			//System.out.println(dictionary.values());
+
 			br.close ();
 			fr.close ();
 		}
