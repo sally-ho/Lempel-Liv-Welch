@@ -4,11 +4,11 @@ import java.io.*;
 
 public class EnCoder
 {
-	HashMap<String, Integer> dictionary = new HashMap<String, Integer>();
+	HashMap < String, Integer > dictionary = new HashMap < String, Integer > ();
 	
 	Scanner keyboard = new Scanner ( System.in );
 	
-	String message;
+	int counter = 1;
 	String previous;
 	String current;
 	String combination;
@@ -25,28 +25,15 @@ public class EnCoder
 		
 		if ( dictionary.containsKey ( combination ) )
 		{
+			previous = combination;
+		}
+		else if ( combination.length () == 1 )
+		{
+			dictionary.put ( combination, 256 + counter );
 		}
 		else
 		{
-					
 		}
-				
-			}
-			
-		}
-}
-
-/*
-{
-
-		message = message + "" + br.read ();
 	}
-	
-	br.close ();
-	fr.close ();
 }
-catch ( Exception e )
-{
-	System.out.println ( "Error Occured" );
 }
-*/
