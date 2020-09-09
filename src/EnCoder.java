@@ -32,8 +32,29 @@ public class EnCoder
 			dictionary.put ( combination, 256 + counter );
 		}
 		else
-		{
+			{
+				dictionary.put((previous + current), counter);
+				counter++;
+				encoded += " " + dictionary.get(previous);
+				previous = current;
+			}
+
+			br.close ();
+			fr.close ();
+		}
+		catch ( Exception e ){
+		System.out.println ( "Error Occured" );
+		}
+		try {
+		FileWriter fw = new FileWriter(new File("encoded.txt"));
+		BufferedWriter buffer = new BufferedWriter(fw);
+		buffer.write(encoded);
+		buffer.close();
+		}
+		catch (Exception e) {
+			System.out.println("Error Occured in Writing.");
 		}
 	}
+}
 }
 }
