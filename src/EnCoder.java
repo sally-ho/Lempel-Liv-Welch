@@ -4,78 +4,81 @@ import java.io.*;
 
 public class EnCoder
 {
-	public static void main(String [] args)
-	{
-		HashMap < String, Integer > dictionary = new HashMap < String, Integer > ();
-			// HashMap Dictionary for Strings and Integers
-		
+	public static void main(String [] args){
+		HashMap<String, Integer> dictionary = new HashMap<String, Integer>();
 		String previous;
-			// String for Previous
-		
 		String current;
-			// String for Current
-		
-		String combination;
-			// String for Previous + Current
-		
 		int counter = 256;
-			// String for 
-		
-		String encoded;
+		String line = null;
+		String encoded = "";
+		String combination = "";
+		try{
+			FileReader fr = new FileReader("text.txt");
+			BufferedReader br = new BufferedReader (fr);
+				
+			previous = "";
+				
+			int a;
+			while ((a = br.read()) != -1)
+			{
 
-		FileReader fr = new FileReader ( "message.txt");
-		BufferedReader br = new BufferedReader ( fr );
+				current = String.valueOf((char)a);
+				combination = previous + current;
+				if(combination.length() == 1){
+					previous = combination;
+				}
+				else if (dictionary.containsKey(combination))
+				{
+					previous = combination;
+				}
 
-		previous = "";
-
-		while ( br.ready () )
-			// While the Buffered Reader Has Another Char
-		{
-			current = "" + br.read ();
-				// Current Is the Next Char
+				else
+				{
+					dictionary.put((combination), counter);
+					counter++;
+					if (previous.length() == 1){
+						encoded += (int)(previous.charAt(0)) + " ";
+					}
+					else{
+						encoded += dictionary.get(previous) + " ";
+					}
+					previous = current;
+					
+				}
+					
+				
+				
+				
+			}
+			if (previous.length() == 1){
+				encoded += (int)(previous.charAt(0));
+			}
+			else{
+				encoded += dictionary.get(previous);
+			}
 			
-			combination = previous + current;
-				// Combination Becomes Previous + Current
-
-			if ( dictionary.containsKey ( combination ) )
-			{
-				previous = combination;
-			}
-				// If Dictionary Already Contains the Key, We Skip and Previous Becomes Combination
-			
-			else if ( combination.length () == 1 )
-			{
-				dictionary.put ( combination, counter );
-			}
-				// If the Combination Is Single Length, and Thus Already in ASKII, Then We Put in Dictionary
-			else
-			{
-				dictionary.put((previous + current), counter);
-				counter++;
-				encoded += " " + dictionary.get(previous);
-				previous = current;
-			}
+			//this code prints the dictionary...you're welcome
+			//for (String key : dictionary.keySet()){
+				//System.out.println(key + ": " + dictionary.get(key));
+			//}
 
 			br.close ();
 			fr.close ();
 		}
-
-		catch ( Exception e )
-		{
+				
+		catch ( Exception e ){
 			System.out.println ( "Error Occured" );
 		}
-
-		try
-		{
+		try {
 			FileWriter fw = new FileWriter(new File("encoded.txt"));
 			BufferedWriter buffer = new BufferedWriter(fw);
 			buffer.write(encoded);
 			buffer.close();
 		}
-
-		catch ( Exception e )
-		{
+		catch (Exception e) {
 			System.out.println("Error Occured in Writing.");
 		}
 	}
+	
+		
 }
