@@ -60,8 +60,10 @@ public class EnCoder
 				// If the string is new, then put it in the dictionary
 				else
 				{
-					// Put Combination in the Next Available Position Given by Counter
-					dictionary.put( (combination), counter );
+					// Put Combination in the Next Available Position Given by Counter, as long as counter <= 100000 (table limit)
+					if (counter <= 100000){
+						dictionary.put( (combination), counter );
+					}
 					
 					// Add for Next Counter
 					counter++;
