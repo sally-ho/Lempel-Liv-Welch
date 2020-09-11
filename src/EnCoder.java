@@ -4,50 +4,80 @@ import java.io.*;
 
 public class EnCoder
 {
-	public static void main(String [] args){
-		HashMap<String, Integer> dictionary = new HashMap<String, Integer>();
+	public static void main ( String [] args )
+	{
+		// HashMap for Dictionary
+		HashMap < String, Integer > dictionary = new HashMap < String, Integer > ();
+		
+		// String for Previous String
 		String previous;
+		
+		//String for Current String
 		String current;
+		
+		// Counter for New Strings in Dictionary
 		int counter = 256;
+		
+		// Initial Strings
 		String line = null;
 		String encoded = "";
 		String combination = "";
-		try{
-			FileReader fr = new FileReader("text.txt");
-			BufferedReader br = new BufferedReader (fr);
-				
+		
+		try
+		{
+			// New File Reader for Text File
+			FileReader fr = new FileReader ( "text.txt" );
+			
+			// New Buffered Reader to Read Text File
+			BufferedReader br = new BufferedReader ( fr );
+			
+			// Initialization of String Previous with No Text
 			previous = "";
 				
 			int a;
-			while ((a = br.read()) != -1)
+			
+			// While Loop for All the Strings in the Text File
+			while ( ( a = br.read() ) != -1 )
 			{
-
-				current = String.valueOf((char)a);
+				// Initialization of String Current with String in Text File
+				current = String.valueOf ( ( char ) a );
+				
+				// Initialization of String Combination
 				combination = previous + current;
-				if(combination.length() == 1){
+				
+				// If the length of the string is one, then it must already be in the dictionary
+				if ( combination.length () == 1 )
+				{
 					previous = combination;
 				}
-				else if (dictionary.containsKey(combination))
+				
+				// If the string exists in the dictionary, then previous becomes combination
+				else if (dictionary.containsKey ( combination ) )
 				{
 					previous = combination;
 				}
 
+				// If the string is new, then put it in the dictionary
 				else
 				{
-					dictionary.put((combination), counter);
+					// Put Combination in the Next Available Position Given by Counter
+					dictionary.put( (combination), counter );
+					
+					// Add for Next Counter
 					counter++;
-					if (previous.length() == 1){
-						encoded += (int)(previous.charAt(0)) + " ";
+					
+					if ( previous.length () == 1 )
+					{
+						encoded += ( int )( previous.charAt ( 0 ) ) + " ";
 					}
-					else{
-						encoded += dictionary.get(previous) + " ";
+					else
+					{
+						encoded += dictionary.get ( previous ) + " ";
 					}
 					previous = current;
 					
 				}
 					
-				
-				
 				
 			}
 			if (previous.length() == 1){
@@ -79,6 +109,4 @@ public class EnCoder
 			System.out.println("Error Occured in Writing.");
 		}
 	}
-	
-		
 }
