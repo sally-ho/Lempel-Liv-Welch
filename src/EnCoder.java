@@ -66,6 +66,8 @@ public class EnCoder
 					// Add for Next Counter
 					counter++;
 					
+					//Add the previous String to the encoded String
+					//Each number in the code is delimited by a space
 					if ( previous.length () == 1 )
 					{
 						encoded += ( int )( previous.charAt ( 0 ) ) + " ";
@@ -74,12 +76,14 @@ public class EnCoder
 					{
 						encoded += dictionary.get ( previous ) + " ";
 					}
+					//Set the previous String to the current String
 					previous = current;
 					
 				}
 					
 				
 			}
+			//encode the last segment of text
 			if (previous.length() == 1){
 				encoded += (int)(previous.charAt(0));
 			}
@@ -100,6 +104,7 @@ public class EnCoder
 			System.out.println ( "Error Occured" );
 		}
 		try {
+			//write the encoded string to the encoded file
 			FileWriter fw = new FileWriter(new File("encoded.txt"));
 			BufferedWriter buffer = new BufferedWriter(fw);
 			buffer.write(encoded);
