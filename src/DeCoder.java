@@ -23,6 +23,7 @@ public class DeCoder {
 		//arraylist that stores each encoded value
 		ArrayList <String> codes = new ArrayList <String> ();
 
+
 		//reading in the textFile and storing the whole file as a string
 		while (reader.ready())
 		{
@@ -87,8 +88,8 @@ public class DeCoder {
 			printer.print(dictionary.get(codes.get(counter)));
 		}
 
-		printer.close();
 		fr.close();
+		printer.close();
 		reader.close();
 
 
