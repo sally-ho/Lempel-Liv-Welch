@@ -15,8 +15,8 @@ public class DeCoder {
 	{
 		//reading in a text file and creating print writer
 		FileReader fr = new FileReader (fileName);
-		BufferedReader br = new BufferedReader(fr);
-		PrintWriter pw = new PrintWriter ("decoded.txt");
+		BufferedReader reader = new BufferedReader(fr);
+		PrintWriter printer = new PrintWriter ("decoded.txt");
 		String textFile = "";
 		//create hash map to use as dictionary
 		HashMap <String, String> dictionary = new HashMap <String,String>();
@@ -24,9 +24,9 @@ public class DeCoder {
 		ArrayList <String> codes = new ArrayList <String> ();
 
 		//reading in the textFile and storing as a string
-		while (br.ready())
+		while (reader.ready())
 		{
-			char letter = (char)br.read();
+			char letter = (char)reader.read();
 			textFile += letter;
 		}
 		
@@ -39,19 +39,32 @@ public class DeCoder {
 		
 		//reconstructing the dictionary and adding encoded values into "codes" arraylist
 		String currentCode = "";
-		String previousCode = "";
+		String previousCode = textFile.substring(0, textFile.indexOf(" "));
+		codes.add(previousCode);
 		String dictionaryEntry = "";
 		int index = 256;
-		previousCode = textFile.substring(0, textFile.indexOf(" "));
-		codes.add(previousCode);
-		for (int counter = 0; counter < textFile.length(); counter++)
+		while (textFile.indexOf(" ") > 0)
 		{
 			//removing previous code from textFile
 			textFile = textFile.substring(textFile.indexOf(" ")+1);
-			currentCode = textFile.substring(0, textFile.indexOf(" "));
+			if (textFile.indexOf (" ")<0)
+			{
+				currentCode = textFile;
+			}
+			else
+			{
+				currentCode = textFile.substring(0, textFile.indexOf(" "));
+			}
 			codes.add(currentCode);
 			//new dictionary entry = all of previous code + first letter of current code
-			dictionaryEntry = dictionary.get(previousCode) + dictionary.get(currentCode).charAt(0);
+			if (dictionary.get(currentCode)!=null)
+			{
+				dictionaryEntry = dictionary.get(previousCode) + dictionary.get(currentCode).charAt(0);
+			}
+			else
+			{
+				dictionaryEntry = dictionary.get(previousCode) + dictionary.get(previousCode).charAt(0);
+			}
 			dictionary.put(""+index, dictionaryEntry);
 			previousCode = currentCode;
 			index++;
@@ -60,12 +73,12 @@ public class DeCoder {
 		//computer decoded text from dictionary, outputting to "decoded.txt"
 		for (int counter = 0; counter < codes.size(); counter++)
 		{
-			pw.print(dictionary.get(codes.get(counter)));
+			printer.print(dictionary.get(codes.get(counter)));
 		}
 
-		pw.close();
+		printer.close();
 		fr.close();
-		br.close();
+		reader.close();
 
 
 
