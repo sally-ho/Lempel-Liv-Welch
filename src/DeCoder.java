@@ -15,8 +15,8 @@ public class DeCoder {
 	{
 		//reading in a text file and creating print writer
 		FileReader fr = new FileReader (fileName);
-		BufferedReader br = new BufferedReader(fr);
-		PrintWriter pw = new PrintWriter ("decoded.txt");
+		BufferedReader reader = new BufferedReader(fr);
+		PrintWriter printer = new PrintWriter ("decoded.txt");
 		String textFile = "";
 		//create hash map to use as dictionary
 		HashMap <String, String> dictionary = new HashMap <String,String>();
@@ -24,9 +24,9 @@ public class DeCoder {
 		ArrayList <String> codes = new ArrayList <String> ();
 
 		//reading in the textFile and storing as a string
-		while (br.ready())
+		while (reader.ready())
 		{
-			char letter = (char)br.read();
+			char letter = (char)reader.read();
 			textFile += letter;
 		}
 		
@@ -60,12 +60,12 @@ public class DeCoder {
 		//computer decoded text from dictionary, outputting to "decoded.txt"
 		for (int counter = 0; counter < codes.size(); counter++)
 		{
-			pw.print(dictionary.get(codes.get(counter)));
+			printer.print(dictionary.get(codes.get(counter)));
 		}
 
-		pw.close();
 		fr.close();
-		br.close();
+		printer.close();
+		reader.close();
 
 
 
