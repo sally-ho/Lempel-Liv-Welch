@@ -14,6 +14,11 @@ public class DeCoder{
 	public DeCoder(){
 	}
 
+	/**
+	 * reads in text file of codes reconstructs the original dictionary using a hashmap with
+	 * characters as keys and corresponding codes as values decodes the text file using the newly
+	 * reconstructed directionary prints decoded text!
+	 */
 	public void decode(String fileName) throws IOException{
 		// reading in a text file and creating print writer
 		FileReader fr = new FileReader(fileName);
